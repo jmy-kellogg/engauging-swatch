@@ -18,8 +18,9 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFF9F0;
+  --foreground: #272524;
+
 }
 
 @theme inline {
@@ -30,23 +31,40 @@
 }
 
 @theme {
-  --color-ruby-50: oklch(0.985 0.010 8);     /* very light tint */
-  --color-ruby-100: oklch(0.950 0.025 8);
-  --color-ruby-200: oklch(0.870 0.045 8);
-  --color-ruby-300: oklch(0.750 0.060 8);
-  --color-ruby-400: oklch(0.630 0.065 8);
-  --color-ruby-500: oklch(0.554 0.070 8);    /* #b50938 base */
-  --color-ruby-600: oklch(0.440 0.070 8);
-  --color-ruby-700: oklch(0.350 0.060 8);
-  --color-ruby-800: oklch(0.250 0.050 8);
-  --color-ruby-900: oklch(0.180 0.040 8);
-  --color-ruby-950: oklch(0.110 0.030 8);    /* very deep */
+
+  --color-sage: oklch(0.7875 0.0568 138.56);
+  --color-sage-50: oklch(0.975 0.02 138.56);
+  --color-sage-100: oklch(0.92 0.03 138.56);
+  --color-sage-200: oklch(0.86 0.04 138.56);
+  --color-sage-300: oklch(0.81 0.05 138.56);
+  --color-sage-400: oklch(0.7875 0.0568 138.56); /* base */
+  --color-sage-500: oklch(0.72 0.055 138.56);
+  --color-sage-600: oklch(0.62 0.048 138.56);
+  --color-sage-700: oklch(0.5 0.04 138.56);
+  --color-sage-800: oklch(0.38 0.03 138.56);
+  --color-sage-900: oklch(0.26 0.02 138.56);
+  --color-sage-950: oklch(0.18 0.015 138.56);
+
+  --color-espresso: oklch(0.2663 0.0035 48.59);
+  --color-espresso-50: oklch(0.985 0.002 48.59);
+  --color-espresso-100: oklch(0.934 0.0025 48.59);
+  --color-espresso-200: oklch(0.812 0.0028 48.59);
+  --color-espresso-300: oklch(0.643 0.0031 48.59);
+  --color-espresso-400: oklch(0.451 0.0033 48.59);
+  --color-espresso-500: oklch(0.355 0.0034 48.59);
+  --color-espresso-600: oklch(0.2663 0.0035 48.59); /* base */
+  --color-espresso-700: oklch(0.210 0.0035 48.59);
+  --color-espresso-800: oklch(0.155 0.0035 48.59);
+  --color-espresso-900: oklch(0.105 0.0035 48.59);
+  --color-espresso-950: oklch(0.075 0.0035 48.59);
+
+  --color-menu: var(--color-sage);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #272524;
+    --foreground: #FFF9F0;
   }
 }
 
