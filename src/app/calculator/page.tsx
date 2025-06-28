@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
 import Modal from "./component/modal";
+import { RoundType } from "./component/modal";
 
 type Unit = "inch" | "cm";
 
 export default function Artworks() {
   const [unit, setUnit] = useState<Unit>("inch");
+  const [stitchRound, setStichRound] = useState<RoundType>("nearest");
+  const [rowRound, setRowRound] = useState<RoundType>("nearest");
   // Gauge Section
   const [gaugeWidth, setGaugeWidth] = useState("4");
   const [gaugeHeight, setGaugeHeight] = useState("4");
@@ -28,6 +31,48 @@ export default function Artworks() {
     },
   };
 
+  const roundDict = {
+    nearest: Math.round,
+    down: Math.floor,
+    up: Math.ceil,
+    even: (count: number) => {
+      const rounded = Math.round(count);
+      if (rounded % 2 === 0) {
+        return rounded;
+      } else {
+        const up = Math.abs(count - (rounded + 1));
+        const down = Math.abs(count - (rounded - 1));
+        return up < down ? rounded + 1 : rounded - 1;
+      }
+    },
+    odd: (count: number) => {
+      const rounded = Math.round(count);
+      if (rounded % 2 === 1) {
+        return rounded;
+      } else {
+        const up = Math.abs(count - rounded + 1);
+        const down = Math.abs(count - rounded - 1);
+        return up < down ? rounded + 1 : rounded - 1;
+      }
+    },
+    oddUp: (count: number) => {
+      const rounded = Math.round(count);
+      return rounded % 2 === 1 ? rounded : rounded + 1;
+    },
+    oddDown: (count: number) => {
+      const rounded = Math.round(count);
+      return rounded % 2 === 1 ? rounded : rounded - 1;
+    },
+    evenUp: (count: number) => {
+      const rounded = Math.round(count);
+      return rounded % 2 === 0 ? rounded : rounded + 1;
+    },
+    evenDown: (count: number) => {
+      const rounded = Math.round(count);
+      return rounded % 2 === 0 ? rounded : rounded - 1;
+    },
+  };
+
   const setDefaultForm = (newUnit: Unit) => {
     const gaugeSize = defaultUnits["gauge"][newUnit];
     const projectSize = defaultUnits["project"][newUnit];
@@ -36,6 +81,8 @@ export default function Artworks() {
     setGaugeHeight(gaugeSize);
     setProjectWidth(projectSize);
     setProjectHeight(projectSize);
+    setProjectStitch("");
+    setProjectRow("");
   };
 
   const updateMeasurements = (newUnit: Unit) => {
@@ -43,32 +90,46 @@ export default function Artworks() {
     setUnit(newUnit);
   };
 
-  const setStitchCount = () => {
+  const setStitchCount = (stitchRound: RoundType) => {
+    if (!projectWidth || !gaugeWidth || !gaugeStitch) return;
     const pWidth = parseInt(projectWidth);
     const gWidth = parseInt(gaugeWidth);
     const gStitchCount = parseInt(gaugeStitch);
-    const pSwitchCount = Math.round((pWidth * gStitchCount) / gWidth);
+    const pSwitchCount = roundDict[stitchRound](
+      (pWidth * gStitchCount) / gWidth
+    );
 
     setProjectStitch(pSwitchCount.toString());
   };
 
-  const setRowCount = () => {
+  const setRowCount = (rowRound: RoundType) => {
+    if (!projectHeight || !gaugeHeight || !gaugeRow) return;
     const pHeight = parseInt(projectHeight);
     const gHeight = parseInt(gaugeHeight);
-    const gRowCount = parseInt(gaugeStitch);
-    const pRowCount = Math.round((pHeight * gRowCount) / gHeight);
+    const gRowCount = parseInt(gaugeRow);
+    const pRowCount = roundDict[rowRound]((pHeight * gRowCount) / gHeight);
 
     setProjectRow(pRowCount.toString());
   };
 
   const calculateRows = () => {
-    setStitchCount();
-    setRowCount();
+    setStitchCount(stitchRound);
+    setRowCount(rowRound);
+  };
+
+  const roundStitches = (roundType: RoundType) => {
+    setStichRound(roundType);
+    if (projectStitch) setStitchCount(roundType);
+  };
+
+  const roundRows = (roundType: RoundType) => {
+    setRowRound(roundType);
+    if (projectRow) setRowCount(roundType);
   };
 
   return (
     <div className="m-5 justify-self-center">
-      <div className="p-2 bg-white border border-gray-300 rounded-lg shadow-sm">
+      <div className="p-2 bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-espresso-500 dark:border-espresso-300">
         <div className="flex justify-between">
           <div className="flex">
             <div className="flex items-center m-2">
@@ -82,7 +143,7 @@ export default function Artworks() {
               />
               <label
                 htmlFor="default-radio-1"
-                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-400 hover:cursor-pointer"
+                className="ms-2 text-sm font-medium text-gray-900 dark:text-espresso-100 hover:cursor-pointer"
               >
                 Inches
               </label>
@@ -98,7 +159,7 @@ export default function Artworks() {
               />
               <label
                 htmlFor="default-radio-2"
-                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-400 hover:cursor-pointer"
+                className="ms-2 text-sm font-medium text-gray-900 dark:text-espresso-100 hover:cursor-pointer"
               >
                 Centimeters
               </label>
@@ -120,12 +181,12 @@ export default function Artworks() {
           </div>
         </div>
         <p className="ml-3">Gauge Swatch</p>
-        <div className="border border-gray-400 rounded-sm m-2 mt-0">
+        <div className="border border-gray-400 rounded-sm m-2 mt-0 dark:border-espresso-200">
           <div className="flex">
             <div className="flex flex-col m-3">
               <label
                 htmlFor="gaugeWith"
-                className="text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Width
               </label>
@@ -134,13 +195,13 @@ export default function Artworks() {
                 type="number"
                 value={gaugeWidth}
                 onChange={(e) => setGaugeWidth(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
               <label
                 htmlFor="gaugeHeight"
-                className="text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Height
               </label>
@@ -149,7 +210,7 @@ export default function Artworks() {
                 type="number"
                 value={gaugeHeight}
                 onChange={(e) => setGaugeHeight(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
@@ -157,7 +218,7 @@ export default function Artworks() {
             <div className="flex flex-col m-3">
               <label
                 htmlFor="gaugeStitch"
-                className="text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Stitch Count
               </label>
@@ -166,13 +227,13 @@ export default function Artworks() {
                 type="number"
                 value={gaugeStitch}
                 onChange={(e) => setGaugeStitch(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
               <label
                 htmlFor="gaugeRow"
-                className="text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Row count
               </label>
@@ -181,18 +242,18 @@ export default function Artworks() {
                 type="number"
                 value={gaugeRow}
                 onChange={(e) => setGaugeRow(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
         </div>
         <p className="ml-3">Project</p>
-        <div className="border border-gray-400 rounded-sm m-2 mt-0">
+        <div className="border border-gray-400 rounded-sm m-2 mt-0 dark:border-espresso-200">
           <div className="flex">
             <div className="flex flex-col m-3">
               <label
                 htmlFor="projectWidth"
-                className="text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Width
               </label>
@@ -201,13 +262,13 @@ export default function Artworks() {
                 type="number"
                 value={projectWidth}
                 onChange={(e) => setProjectWidth(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
               <label
                 htmlFor="projectHeight"
-                className="text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Height
               </label>
@@ -216,7 +277,7 @@ export default function Artworks() {
                 type="number"
                 value={projectHeight}
                 onChange={(e) => setProjectHeight(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
@@ -225,46 +286,41 @@ export default function Artworks() {
             <div className="flex flex-col m-3">
               <label
                 htmlFor="projectStitch"
-                className="flex text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="flex text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Stitch Count
-                <Modal />
+                <Modal
+                  onSubmit={roundStitches}
+                  title="Round Stitches"
+                  iconType="vertical"
+                />
               </label>
               <input
                 name="projectStitch"
                 type="number"
                 value={projectStitch}
                 onChange={(e) => setProjectStitch(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
               <label
                 htmlFor="projectRow"
-                className="flex text-sm font-medium text-gray-900 dark:text-gray-400"
+                className="flex text-sm font-medium text-gray-900 dark:text-espresso-100"
               >
                 Row Count
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-5 mx-1"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
-                  />
-                </svg>
+                <Modal
+                  onSubmit={roundRows}
+                  title="Round Rows"
+                  iconType="horizontal"
+                />
               </label>
               <input
                 name="projectRow"
                 type="number"
                 value={projectRow}
                 onChange={(e) => setProjectRow(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-400 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6"
+                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
