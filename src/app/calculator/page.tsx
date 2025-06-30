@@ -5,7 +5,7 @@ import { RoundType } from "./component/modal";
 
 type Unit = "inch" | "cm";
 
-export default function Artworks() {
+export default function Calculator() {
   const [unit, setUnit] = useState<Unit>("inch");
   const [stitchRound, setStichRound] = useState<RoundType>("nearest");
   const [rowRound, setRowRound] = useState<RoundType>("nearest");
