@@ -37,6 +37,7 @@ export default function RootLayout({
               aria-hidden
               src="/yarnLineLogo.svg"
               alt="File icon"
+              priority={true}
               width={165}
               height={32}
             />

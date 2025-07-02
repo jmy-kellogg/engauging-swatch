@@ -13,7 +13,7 @@ export default function SideMenu() {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-6 m-2 hover:cursor-pointer"
+        className="size-6 m-2 hover:cursor-pointer hover:bg-sage-200"
         id="menu-icon"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -26,7 +26,7 @@ export default function SideMenu() {
 
       <Link
         href="/calculator"
-        className="flex m-2 items-center gap-2 hover:underline hover:underline-offset-4"
+        className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ export default function SideMenu() {
       </Link>
       <Link
         href="/filet"
-        className="flex m-2 items-center gap-2 hover:underline hover:underline-offset-4"
+        className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ export default function SideMenu() {
       </Link>
       <Link
         href="/stitches"
-        className="flex m-2 items-center gap-2 hover:underline hover:underline-offset-4"
+        className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ export default function SideMenu() {
       </Link>
       <Link
         href="/patterns"
-        className="flex m-2 items-center gap-2 hover:underline hover:underline-offset-4"
+        className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

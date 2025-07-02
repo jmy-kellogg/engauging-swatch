@@ -15,11 +15,11 @@ export default function Filet() {
   const [chartKey, setChartKey] = useState(Math.random());
 
   const arrayFromNum = (num: number) => {
-    return Array.from({ length: num }, (v, i) => i);
+    return Array.from({ length: num }, (_v, i) => i);
   };
 
-  const clearChart = async () => {
-    await localStorage.clear();
+  const clearChart = () => {
+    localStorage.clear();
     setChartKey(Math.random());
   };
 
