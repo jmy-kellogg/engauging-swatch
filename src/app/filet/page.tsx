@@ -25,6 +25,7 @@ export default function Filet() {
 
   return (
     <div className="m-5 justify-self-center">
+      <h1 className="m-2 justify-self-center">Filet Creator</h1>
       <div className="flex">
         <div className="flex flex-col m-3 w-20">
           <label

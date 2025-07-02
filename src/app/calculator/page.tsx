@@ -129,6 +129,7 @@ export default function Calculator() {
 
   return (
     <div className="m-5 justify-self-center">
+      <h1 className="m-2 justify-self-center">Gauge Calculator</h1>
       <div className="p-2 bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-espresso-500 dark:border-espresso-300">
         <div className="flex justify-between">
           <div className="flex">

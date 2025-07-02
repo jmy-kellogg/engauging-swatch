@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import "../styles/globals.css";
 import SideMenu from "./components/sideMenu";
 
@@ -29,7 +31,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex`}
       >
         <SideMenu />
-        <div className="w-full">{children}</div>
+        <div className="m-3 w-full">
+          <Link className="absolute hover:pointer" href="/">
+            <Image
+              aria-hidden
+              src="/yarnLineLogo.svg"
+              alt="File icon"
+              width={165}
+              height={32}
+            />
+          </Link>
+          {children}
+        </div>
       </body>
     </html>
   );
