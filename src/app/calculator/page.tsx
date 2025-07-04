@@ -130,7 +130,7 @@ export default function Calculator() {
     <div className="m-5 justify-self-center">
       <h1 className="m-2 justify-self-center">Gauge Calculator</h1>
       <div className="p-2 bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-espresso-500 dark:border-espresso-300">
-        <div className="flex justify-between">
+        <div className="flex flex-wrap justify-between">
           <div className="flex">
             <div className="flex items-center m-2">
               <input
@@ -197,7 +197,7 @@ export default function Calculator() {
                 type="number"
                 value={gaugeWidth}
                 onChange={(e) => setGaugeWidth(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
@@ -213,7 +213,7 @@ export default function Calculator() {
                 type="number"
                 value={gaugeHeight}
                 onChange={(e) => setGaugeHeight(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function Calculator() {
                 type="number"
                 value={gaugeStitch}
                 onChange={(e) => setGaugeStitch(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
@@ -247,7 +247,7 @@ export default function Calculator() {
                 type="number"
                 value={gaugeRow}
                 onChange={(e) => setGaugeRow(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
@@ -268,7 +268,7 @@ export default function Calculator() {
                 type="number"
                 value={projectWidth}
                 onChange={(e) => setProjectWidth(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
@@ -284,7 +284,7 @@ export default function Calculator() {
                 type="number"
                 value={projectHeight}
                 onChange={(e) => setProjectHeight(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>
@@ -310,7 +310,7 @@ export default function Calculator() {
                 type="number"
                 value={projectStitch}
                 onChange={(e) => setProjectStitch(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
             <div className="flex flex-col m-3">
@@ -333,7 +333,7 @@ export default function Calculator() {
                 type="number"
                 value={projectRow}
                 onChange={(e) => setProjectRow(e.target.value)}
-                className="rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
+                className="w-25 md:w-auto rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-espresso-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-500 sm:text-sm/6 dark:text-espresso-100 dark:bg-espresso"
               />
             </div>
           </div>

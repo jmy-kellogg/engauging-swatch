@@ -39,10 +39,10 @@ export default function RootLayout({
           >
             <Image
               aria-hidden
-              src="/yarnLineLogo.svg"
+              src="/yarnLogo.svg"
               alt="File icon"
               priority={true}
-              width={165}
+              width={110}
               height={32}
             />
           </Link>
