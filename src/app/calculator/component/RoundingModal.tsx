@@ -22,7 +22,7 @@ interface RoundTypeOption {
   label?: string;
 }
 
-function Modal({ onSubmit, title, iconType }: Props) {
+export default function RoundingModal({ onSubmit, title, iconType }: Props) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [roundType, setRoundType] = useState<RoundType>("nearest");
   const roundTypes: RoundTypeOption[] = [
@@ -41,7 +41,7 @@ function Modal({ onSubmit, title, iconType }: Props) {
     <>
       {showModal && (
         <div
-          id="default-modal"
+          id="rounding-modal"
           className="absolute bg-white p-4 w-xs ml-27 rounded-lg shadow-lg border dark:bg-espresso-500 dark:border-espresso-200"
         >
           <div className="flex items-center justify-between p-1 border-b border-espresso-300 rounded-t dark:text-espresso-100">
@@ -80,6 +80,7 @@ function Modal({ onSubmit, title, iconType }: Props) {
         className="hover:cursor-pointer"
         type="button"
         onClick={() => setShowModal(!showModal)}
+        aria-label="Toggle Rounding Modal"
       >
         {iconType === "vertical" ? (
           <svg
@@ -88,8 +89,9 @@ function Modal({ onSubmit, title, iconType }: Props) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-5 mx-1"
+            className="size-6 m-1"
             id="vertical-filter"
+            aria-label="Stitch adjustment"
           >
             <path
               strokeLinecap="round"
@@ -105,7 +107,8 @@ function Modal({ onSubmit, title, iconType }: Props) {
             strokeWidth={1.5}
             stroke="currentColor"
             id="horizontal-filter"
-            className="size-5 mx-1"
+            className="size-6 m-1"
+            aria-label="Row adjustment"
           >
             <path
               strokeLinecap="round"
@@ -118,5 +121,3 @@ function Modal({ onSubmit, title, iconType }: Props) {
     </>
   );
 }
-
-export default Modal;

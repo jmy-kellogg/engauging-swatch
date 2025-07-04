@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import Modal from "./component/modal";
-import { RoundType } from "./component/modal";
+import RoundingModal, { RoundType } from "./component/RoundingModal";
 
 type Unit = "inch" | "cm";
 
@@ -136,14 +135,14 @@ export default function Calculator() {
             <div className="flex items-center m-2">
               <input
                 checked={unit === "inch"}
-                id="default-radio-1"
+                id="inches-radio"
                 type="radio"
-                name="default-radio"
+                name="inches-radio"
                 className="w-4 h-4 text-sky-300 hover:cursor-pointer"
                 onChange={() => updateMeasurements("inch")}
               />
               <label
-                htmlFor="default-radio-1"
+                htmlFor="inches-radio"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-espresso-100 hover:cursor-pointer"
               >
                 Inches
@@ -152,14 +151,14 @@ export default function Calculator() {
             <div className="flex items-center m-2">
               <input
                 checked={unit === "cm"}
-                id="default-radio-2"
+                id="cm-radio"
                 type="radio"
-                name="default-radio"
+                name="cm-radio"
                 className="w-4 h-4 text-sky-300 hover:cursor-pointer"
                 onChange={() => updateMeasurements("cm")}
               />
               <label
-                htmlFor="default-radio-2"
+                htmlFor="cm-radio"
                 className="ms-2 text-sm font-medium text-gray-900 dark:text-espresso-100 hover:cursor-pointer"
               >
                 Centimeters
@@ -170,6 +169,7 @@ export default function Calculator() {
             <button
               className="px-2 py-1 m-1 bg-sage-300 text-gray-800 rounded-lg shadow-sm font-bold hover:cursor-pointer hover:bg-sage-500"
               onClick={calculateRows}
+              aria-label="Calculate Stich and Row Count"
             >
               Calculate
             </button>
@@ -192,6 +192,7 @@ export default function Calculator() {
                 Width
               </label>
               <input
+                id="gaugeWith"
                 name="gaugeWith"
                 type="number"
                 value={gaugeWidth}
@@ -207,6 +208,7 @@ export default function Calculator() {
                 Height
               </label>
               <input
+                id="gaugeHeight"
                 name="gaugeHeight"
                 type="number"
                 value={gaugeHeight}
@@ -224,6 +226,7 @@ export default function Calculator() {
                 Stitch Count
               </label>
               <input
+                id="gaugeStitch"
                 name="gaugeStitch"
                 type="number"
                 value={gaugeStitch}
@@ -239,6 +242,7 @@ export default function Calculator() {
                 Row count
               </label>
               <input
+                id="gaugeRow"
                 name="gaugeRow"
                 type="number"
                 value={gaugeRow}
@@ -259,6 +263,7 @@ export default function Calculator() {
                 Width
               </label>
               <input
+                id="projectWidth"
                 name="projectWidth"
                 type="number"
                 value={projectWidth}
@@ -274,6 +279,7 @@ export default function Calculator() {
                 Height
               </label>
               <input
+                id="projectHeight"
                 name="projectHeight"
                 type="number"
                 value={projectHeight}
@@ -285,18 +291,21 @@ export default function Calculator() {
 
           <div className="flex">
             <div className="flex flex-col m-3">
-              <label
-                htmlFor="projectStitch"
-                className="flex text-sm font-medium text-gray-900 dark:text-espresso-100"
-              >
-                Stitch Count
-                <Modal
+              <div className="flex items-center">
+                <label
+                  htmlFor="projectStitch"
+                  className="text-sm font-medium text-gray-900 dark:text-espresso-100"
+                >
+                  Stitch Count
+                </label>
+                <RoundingModal
                   onSubmit={roundStitches}
                   title="Round Stitches"
                   iconType="vertical"
                 />
-              </label>
+              </div>
               <input
+                id="projectStitch"
                 name="projectStitch"
                 type="number"
                 value={projectStitch}
@@ -305,18 +314,21 @@ export default function Calculator() {
               />
             </div>
             <div className="flex flex-col m-3">
-              <label
-                htmlFor="projectRow"
-                className="flex text-sm font-medium text-gray-900 dark:text-espresso-100"
-              >
-                Row Count
-                <Modal
+              <div className="flex items-center">
+                <label
+                  htmlFor="projectRow"
+                  className="text-sm font-medium text-gray-900 dark:text-espresso-100"
+                >
+                  Row Count
+                </label>
+                <RoundingModal
                   onSubmit={roundRows}
                   title="Round Rows"
                   iconType="horizontal"
                 />
-              </label>
+              </div>
               <input
+                id="projectRow"
                 name="projectRow"
                 type="number"
                 value={projectRow}

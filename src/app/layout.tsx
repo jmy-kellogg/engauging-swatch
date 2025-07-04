@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Engauging Swatch",
-  description: "Fiber arts tools",
+  description: "Fiber arts and Crochet tools",
 };
 
 export default function RootLayout({
@@ -32,7 +32,11 @@ export default function RootLayout({
       >
         <SideMenu />
         <div className="m-3 w-full">
-          <Link className="absolute hover:pointer" href="/">
+          <Link
+            className="absolute hover:pointer"
+            href="/"
+            aria-label="Homepage"
+          >
             <Image
               aria-hidden
               src="/yarnLineLogo.svg"

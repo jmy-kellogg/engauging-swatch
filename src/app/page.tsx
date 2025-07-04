@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <main>
         <div className="flex flex-col min-h-screen justify-center items-center">
           <div>
@@ -82,6 +82,6 @@ export default function Home() {
           Getting Started
         </Link>
       </footer>
-    </div>
+    </>
   );
 }

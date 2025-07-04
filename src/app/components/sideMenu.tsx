@@ -14,8 +14,8 @@ export default function SideMenu() {
         strokeWidth={1.5}
         stroke="currentColor"
         className="size-6 m-2 hover:cursor-pointer hover:bg-sage-200"
-        id="menu-icon"
         onClick={() => setIsOpen(!isOpen)}
+        aria-label="side menu toggle"
       >
         <path
           strokeLinecap="round"
@@ -27,6 +27,7 @@ export default function SideMenu() {
       <Link
         href="/calculator"
         className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
+        aria-label="Gauge Calculator"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +48,7 @@ export default function SideMenu() {
       <Link
         href="/filet"
         className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
+        aria-label="Filet Pattern Maker"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +70,7 @@ export default function SideMenu() {
       <Link
         href="/stitches"
         className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
+        aria-label="Stitch Library"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,8 +90,9 @@ export default function SideMenu() {
         {isOpen && <h3 className="font-bold">Stitch Library</h3>}
       </Link>
       <Link
-        href="/patterns"
+        href="/getting-started"
         className="flex p-2 items-center gap-2 hover:underline hover:underline-offset-4 hover:bg-sage-200"
+        aria-label="Getting Started"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -4,11 +4,11 @@ import Cell from "./components/cell";
 
 export default function Filet() {
   const [rows, setRows] = useState(() => {
-    const storedTows = localStorage.getItem("rows");
+    const storedTows = localStorage?.getItem("rows");
     return storedTows ? parseInt(storedTows) : 20;
   });
   const [columns, setColumns] = useState(() => {
-    const storedColumns = localStorage.getItem("columns");
+    const storedColumns = localStorage?.getItem("columns");
     return storedColumns ? parseInt(storedColumns) : 20;
   });
   const [cellColor, setCellColor] = useState("bg-sky-300");
